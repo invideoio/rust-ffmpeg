@@ -198,6 +198,13 @@ impl Video {
     }
 
     #[inline]
+    pub fn set_stride(&mut self, index: usize, value: usize) {
+        unsafe {
+            (*self.as_mut_ptr()).linesize[index] = value as c_int;
+        }
+    }
+
+    #[inline]
     pub fn planes(&self) -> usize {
         for i in 0..8 {
             unsafe {
